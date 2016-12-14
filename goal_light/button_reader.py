@@ -81,18 +81,25 @@ def getKey():
 class ButtonReader(threading.Thread):
     def __init__(self, actions=None):
         threading.Thread.__init__(self)
-        self.actions=actions
+        self.daemon = True
+        self.actions = actions
         
     def run(self):
-        while True:
-            inkey = _Getch()
+        logging.info("ButtonReader starting")
+        inkey = _Getch()
+        die = False
+        while not die:
             k = inkey()
-            while k not in set(['1', '2', '3', '4']):
+            while k not in set(['1', '2', '3', '4', 'x']):
                 time.sleep(0)
                 k = inkey()
-            logging.info("Button " + k + " pressed")
-            if self.actions != None:
-                self.actions.trigger(k)
+            if k == 'x':
+                die = True
+            else:
+                logging.info("Button " + k + " pressed")
+                if self.actions != None:
+                    self.actions.trigger(k)
+        logging.info("ButtonReader stopping")
 
 if __name__ == '__main__':
     ButtonReader().start()

@@ -11,8 +11,10 @@ actions = goal_light.ButtonActions(light, horn)
 actions.update_config({'3h': '5', '3l': '6.0', '2l': '4.0', '1h': '1', '2h': '3', '1l': '2.0'})
 
 reader = goal_light.ButtonReader(actions)
-
 reader.start()
+
+while reader.isAlive():
+    pass
 
 # import poller_thread
 # import time
