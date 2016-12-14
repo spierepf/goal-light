@@ -5,4 +5,4 @@ class Light:
         pass
 
     def trigger(self, duration):
-        print "Triggering light for " + str(duration) + " seconds"
+        logging.info("Triggering light for " + str(duration) + " seconds")
