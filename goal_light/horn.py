@@ -5,4 +5,4 @@ class Horn:
         pass
 
     def trigger(self, filename):
-        logging.info("Triggering horn: " + filename)
+        print "Triggering horn: " + filename
