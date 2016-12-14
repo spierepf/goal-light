@@ -83,3 +83,8 @@ def test_no_configure_buttons():
     interpreter = goal_light.JsonInterpreter(None, None, None, button_actions)
     interpreter.interpret('{"b":"0"}')
     assert button_actions.config == None
+
+def test_no_data():
+    interpreter = goal_light.JsonInterpreter()
+    assert 300 == interpreter.interpret("")
+

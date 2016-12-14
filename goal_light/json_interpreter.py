@@ -9,8 +9,12 @@ class JsonInterpreter:
         self.button_actions = button_actions
 
     def interpret(self, json):
-        dict = simplejson.loads(json)
-        logging.info("Received: " + str(dict))
+        try:
+            dict = simplejson.loads(json)
+            logging.info("Received: " + str(dict))
+        except:
+            dict = {}
+
         if 'l' in dict and dict['l'] != "0.0":
             self.light.trigger(dict['l'])
         if 'h' in dict and dict['h'] != "0":
@@ -19,4 +23,5 @@ class JsonInterpreter:
             self.downloader.trigger(dict['dl'])
         if 'b' in dict and dict['b'] != "0":
             self.button_actions.update_config(dict['b'])
+
         return int(dict['d']) if 'd' in dict else 300
