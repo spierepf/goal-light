@@ -69,14 +69,7 @@ class _GetchMacCarbon:
             return chr(msg & 0x000000FF)
 
 
-def getKey():
-    inkey = _Getch()
-    import sys
-    for i in xrange(sys.maxint):
-        k=inkey()
-        if k<>'':break
-
-    return k
+import sys
 
 class ButtonReader(threading.Thread):
     def __init__(self, actions=None):
@@ -86,19 +79,14 @@ class ButtonReader(threading.Thread):
         
     def run(self):
         logging.info("ButtonReader starting")
-        inkey = _Getch()
-        die = False
-        while not die:
-            k = inkey()
-            while k not in set(['1', '2', '3', '4', 'x']):
+        while True:
+            k = sys.stdin.read(1)
+            while k not in set(['1', '2', '3', '4']):
                 time.sleep(0)
-                k = inkey()
-            if k == 'x':
-                die = True
-            else:
-                logging.info("Button " + k + " pressed")
-                if self.actions != None:
-                    self.actions.trigger(k)
+                k = sys.stdin.read(1)
+            logging.info("Button " + k + " pressed")
+            if self.actions != None:
+                self.actions.trigger(k)
         logging.info("ButtonReader stopping")
 
 if __name__ == '__main__':

@@ -9,11 +9,12 @@ class JsonInterpreter:
         self.button_actions = button_actions
 
     def interpret(self, json):
+        dict = {}
         try:
             dict = simplejson.loads(json)
             logging.info("Received: " + str(dict))
         except:
-            dict = {}
+            pass
 
         if 'l' in dict and dict['l'] != "0.0":
             self.light.trigger(dict['l'])

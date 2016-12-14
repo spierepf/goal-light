@@ -21,8 +21,8 @@ reader.start()
 while reader.isAlive():
     json = source.read()
     delay = interpreter.interpret(json)
+    logging.info("Sleeping for: " + str(delay) + " seconds")
     time.sleep(delay)
-
 
 # import poller_thread
 # import time

@@ -10,5 +10,6 @@ class JsonSource:
             with open(self.filename, 'r') as content_file:
                 content = content_file.read()
                 logging.info("Received json: " + content)
+                os.remove(self.filename)
                 return content
         return ""
