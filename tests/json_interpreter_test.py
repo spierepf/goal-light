@@ -5,7 +5,7 @@ class MockLight:
         self.duration = None
 
     def trigger(self, duration):
-        self.duration = duration
+        self.duration = float(duration)
 
 class MockHorn:
     def __init__(self):
@@ -22,14 +22,6 @@ class MockDownloader:
     def trigger(self, id):
         self.url = "http://lh.meetcweb.com/goal/horns/" + id + ".mp3"
         self.destination = "horn/" + id + ".mp3"
-
-class MockButtonActions:
-    def __init__(self):
-        self.config = None
-
-    def update_config(self, config):
-        print "Updated config: " + str(config)
-        self.config = config
 
 def test_construct_json_interpreter():
     interpreter = goal_light.JsonInterpreter()
@@ -81,13 +73,13 @@ def test_no_trigger_download():
     assert downloader.destination == None
 
 def test_configure_buttons():
-    button_actions = MockButtonActions()
+    button_actions = goal_light.ButtonActions()
     interpreter = goal_light.JsonInterpreter(None, None, None, button_actions)
     interpreter.interpret('{"b":{"3h":"5","3l":"6.0","2l":"4.0","1h":"1","2h":"3","1l":"2.0"}}')
     assert button_actions.config != None
 
 def test_no_configure_buttons():
-    button_actions = MockButtonActions()
+    button_actions = goal_light.ButtonActions()
     interpreter = goal_light.JsonInterpreter(None, None, None, button_actions)
     interpreter.interpret('{"b":"0"}')
     assert button_actions.config == None

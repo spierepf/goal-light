@@ -12,7 +12,7 @@ class JsonInterpreter:
         dict = simplejson.loads(json)
         logging.info("Received: " + str(dict))
         if 'l' in dict and dict['l'] != "0.0":
-            self.light.trigger(float(dict['l']))
+            self.light.trigger(dict['l'])
         if 'h' in dict and dict['h'] != "0":
             self.horn.trigger(dict['h'])
         if 'dl' in dict and dict['dl'] != "0":
