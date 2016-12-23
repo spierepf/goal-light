@@ -4,5 +4,5 @@ class Horn:
     def __init__(self):
         pass
 
-    def trigger(self, filename):
-        logging.info("Triggering horn: " + filename)
+    def trigger(self, id):
+        logging.info("Triggering horn: " + id)
