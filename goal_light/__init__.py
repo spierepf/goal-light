@@ -4,3 +4,4 @@ from goal_light.json_source import JsonSource
 from goal_light.json_interpreter import JsonInterpreter
 from goal_light.button_actions import ButtonActions
 from goal_light.button_reader import ButtonReader
+from goal_light.downloader import Downloader
