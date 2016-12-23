@@ -6,7 +6,7 @@ import time
 logging.basicConfig(level=logging.DEBUG)
 logging.info("Starting...")
 
-source = goal_light.JsonSource("data.json")
+source = goal_light.HttpJsonSource('http://www.meetcweb.com/goal/light.php')
 
 light = goal_light.Light()
 horn = goal_light.Horn()

@@ -1,7 +1,7 @@
 import logging
 import os
 
-class JsonSource:
+class FileJsonSource:
     def __init__(self, filename):
         self.filename = filename
         
