@@ -9,7 +9,10 @@ def test_read_data():
     with open('data.json', "w") as text_file:
         text_file.write("text")
     assert "text" == source.read()
-    os.remove('data.json')
+    try:
+        os.remove('data.json')
+    except:
+        pass
 
 def test_no_data():
     source = goal_light.JsonSource('data.json')
