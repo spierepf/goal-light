@@ -11,5 +11,5 @@ class ButtonActions:
         self.config = config
 
     def trigger(self, button):
-        self.light.trigger(self.config[button + "l"])
-        self.horn.trigger(self.config[button + "h"])
+        self.light.trigger(float(self.config[button + "l"]))
+        self.horn.trigger(str(self.config[button + "h"]))

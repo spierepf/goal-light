@@ -3,6 +3,10 @@ import logging
 import sys
 import time
 
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BOARD)
+
 logging.basicConfig(level=logging.DEBUG)
 logging.info("Starting...")
 
@@ -10,8 +14,10 @@ source = goal_light.HttpJsonSource('http://www.meetcweb.com/goal/light.php')
 
 light = goal_light.Light()
 horn = goal_light.Horn()
+horn.trigger("0")
+
 actions = goal_light.ButtonActions(light, horn)
-actions.update_config({'3h': '5', '3l': '6.0', '2l': '4.0', '1h': '1', '2h': '3', '1l': '2.0'})
+actions.update_config({'3h': '0', '3l': '0.0', '2l': '4.0', '1h': '999', '2h': '999', '1l': '2.0'})
 
 interpreter = goal_light.JsonInterpreter(light, horn, None, actions)
 
@@ -24,15 +30,4 @@ while reader.isAlive():
     logging.info("Sleeping for: " + str(delay) + " seconds")
     time.sleep(delay)
 
-# import poller_thread
-# import time
-
-# pt = poller_thread.PollerThread()
-
-# while True:
-#   json = pt.receiveJson()
-#   print json
-#   pt.interpretJson(json)
-#   pt.trigger_light()
-#   pt.trigger_horn()
-#   time.sleep(pt.poll_delay)
+GPIO.cleanup()

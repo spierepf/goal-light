@@ -5,4 +5,4 @@ def test_construct_horn():
 
 def test_trigger_horn():
     horn = goal_light.Horn()
-    horn.trigger("8")
+    horn.trigger("0")
