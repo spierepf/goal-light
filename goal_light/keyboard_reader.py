@@ -3,7 +3,7 @@ import time
 import logging
 import sys
 
-class ButtonReader(threading.Thread):
+class KeyboardReader(threading.Thread):
     def __init__(self, actions=None):
         threading.Thread.__init__(self)
         self.daemon = True

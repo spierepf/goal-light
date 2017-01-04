@@ -11,5 +11,9 @@ class ButtonActions:
         self.config = config
 
     def trigger(self, button):
-        self.light.trigger(float(self.config[button + "l"]))
-        self.horn.trigger(str(self.config[button + "h"]))
+        if button == "4":
+            self.light.trigger(0.0)
+            self.horn.silence_horn()
+        else:
+            self.light.trigger(float(self.config[button + "l"]))
+            self.horn.trigger(str(self.config[button + "h"]))

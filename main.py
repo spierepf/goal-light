@@ -22,7 +22,7 @@ actions.update_config({'3h': '0', '3l': '0.0', '2l': '4.0', '1h': '999', '2h': '
 downloader = goal_light.Downloader()
 interpreter = goal_light.JsonInterpreter(light, horn, downloader, actions)
 
-reader = goal_light.ButtonReader(actions)
+reader = goal_light.KeyboardReader(actions)
 reader.start()
 
 wifi_thread = goal_light.WifiThread()
