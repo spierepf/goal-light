@@ -28,7 +28,7 @@ reader.start()
 wifi_thread = goal_light.WifiThread()
 wifi_thread.start()
 
-GPIO.setup(15, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(15, GPIO.OUT, initial=GPIO.HIGH)
 try:
     while reader.isAlive():
         try:
