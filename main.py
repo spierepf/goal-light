@@ -24,10 +24,19 @@ interpreter = goal_light.JsonInterpreter(light, horn, None, actions)
 reader = goal_light.ButtonReader(actions)
 reader.start()
 
-while reader.isAlive():
-    json = source.read()
-    delay = interpreter.interpret(json)
-    logging.info("Sleeping for: " + str(delay) + " seconds")
-    time.sleep(delay)
+wifi_thread = goal_light.WifiThread()
+wifi_thread.start()
 
+
+try:
+    while reader.isAlive():
+        json = source.read()
+        delay = interpreter.interpret(json)
+        logging.info("Sleeping for: " + str(delay) + " seconds")
+        time.sleep(delay)
+
+except KeyboardInterrupt:
+    pass
+
+wifi_thread.stop()
 GPIO.cleanup()

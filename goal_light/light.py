@@ -18,7 +18,6 @@ class Light:
         self.cv.wait(duration)
 
         GPIO.output(16, GPIO.LOW)
-        GPIO.cleanup()
         logging.info("Light extinguished")
 
         self.cv.release()
