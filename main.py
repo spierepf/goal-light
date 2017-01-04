@@ -2,6 +2,8 @@ import goal_light
 import logging
 import sys
 import time
+import json
+import os
 
 import RPi.GPIO as GPIO
 
@@ -17,7 +19,10 @@ horn = goal_light.Horn()
 horn.trigger("0")
 
 actions = goal_light.ButtonActions(light, horn)
-actions.update_config({'3h': '0', '3l': '0.0', '2l': '4.0', '1h': '999', '2h': '999', '1l': '2.0'})
+
+if os.path.isfile('button_config.json'):
+    with open('button_config.json') as config_file:    
+        actions.update_config(json.load(config_file))
 
 downloader = goal_light.Downloader()
 interpreter = goal_light.JsonInterpreter(light, horn, downloader, actions)
