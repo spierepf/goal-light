@@ -25,6 +25,8 @@ interpreter = goal_light.JsonInterpreter(light, horn, downloader, actions)
 reader = goal_light.KeyboardReader(actions)
 reader.start()
 
+button_reader = goal_light.ButtonReader(actions)
+
 wifi_thread = goal_light.WifiThread()
 wifi_thread.start()
 

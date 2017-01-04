@@ -10,7 +10,7 @@ class KeyboardReader(threading.Thread):
         self.actions = actions
         
     def run(self):
-        logging.info("ButtonReader starting")
+        logging.info("KeyboardReader starting")
         while True:
             k = sys.stdin.read(1)
             while k not in set(['1', '2', '3', '4']):
