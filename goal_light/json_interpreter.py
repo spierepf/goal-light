@@ -14,7 +14,7 @@ class JsonInterpreter:
             dict = simplejson.loads(json)
             logging.info("Received: " + str(dict))
         except:
-            pass
+            raise
 
         if 'l' in dict and dict['l'] != "0.0":
             self.light.trigger(dict['l'])

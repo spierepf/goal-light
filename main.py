@@ -27,11 +27,17 @@ reader.start()
 wifi_thread = goal_light.WifiThread()
 wifi_thread.start()
 
-
+GPIO.setup(15, GPIO.OUT, initial=GPIO.LOW)
 try:
     while reader.isAlive():
-        json = source.read()
-        delay = interpreter.interpret(json)
+        try:
+            json = source.read()
+            delay = interpreter.interpret(json)
+            GPIO.output(15, GPIO.HIGH)
+        except:
+            GPIO.output(15, GPIO.LOW)
+            delay = 120
+
         logging.info("Sleeping for: " + str(delay) + " seconds")
         time.sleep(delay)
 
