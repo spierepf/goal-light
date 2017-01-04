@@ -19,7 +19,8 @@ horn.trigger("0")
 actions = goal_light.ButtonActions(light, horn)
 actions.update_config({'3h': '0', '3l': '0.0', '2l': '4.0', '1h': '999', '2h': '999', '1l': '2.0'})
 
-interpreter = goal_light.JsonInterpreter(light, horn, None, actions)
+downloader = goal_light.Downloader()
+interpreter = goal_light.JsonInterpreter(light, horn, downloader, actions)
 
 reader = goal_light.ButtonReader(actions)
 reader.start()
@@ -35,6 +36,7 @@ try:
             delay = interpreter.interpret(json)
             GPIO.output(15, GPIO.HIGH)
         except:
+            logging.exception('')
             GPIO.output(15, GPIO.LOW)
             delay = 120
 

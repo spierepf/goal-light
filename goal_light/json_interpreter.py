@@ -12,15 +12,16 @@ class JsonInterpreter:
         dict = {}
         try:
             dict = simplejson.loads(json)
-            logging.info("Received: " + str(dict))
+            logging.info("Interpreting: " + str(dict))
         except:
             raise
 
         if 'l' in dict and dict['l'] != "0.0":
-            self.light.trigger(dict['l'])
+            self.light.trigger(float(dict['l']))
         if 'h' in dict and dict['h'] != "0":
             self.horn.trigger(dict['h'])
         if 'dl' in dict and dict['dl'] != "0":
+            logging.info("Downloading: " + str(dict['dl']))
             self.downloader.trigger(dict['dl'])
         if 'b' in dict and dict['b'] != "0":
             self.button_actions.update_config(dict['b'])
